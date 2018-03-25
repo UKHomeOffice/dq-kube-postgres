@@ -1,0 +1,32 @@
+pipeline:
+
+  deploy_to_dev:
+    image: quay.io/ukhomeofficedigital/kd
+    environment:
+      - KUBE_NAMESPACE=dq-management-notprod
+      - INSECURE_SKIP_TLS_VERIFY=true
+    commands:
+      - export KUBE_TOKEN=$$NOTPROD_KUBE_TOKEN
+      - export KUBE_SERVER=$$NOTPROD_KUBE_SERVER
+      - kd -f deployment.yml
+    secrets:
+      - NOTPROD_KUBE_TOKEN
+      - NOTPROD_KUBE_SERVER
+    when:
+      event: [push, tag, deployment]
+
+  deploy_to_prod:
+    image: quay.io/ukhomeofficedigital/kd
+    environment:
+      - KUBE_NAMESPACE=dq-management
+      - INSECURE_SKIP_TLS_VERIFY=true
+    commands:
+      - export KUBE_TOKEN=$$PROD_KUBE_TOKEN
+      - export KUBE_SERVER=$$PROD_KUBE_SERVER
+      - kd -f deployment.yml
+    secrets:
+      - PROD_KUBE_TOKEN
+      - PROD_KUBE_SERVER
+    when:
+      environment: production
+      event: deployment

@@ -8,7 +8,7 @@ pipeline:
     commands:
       - export KUBE_TOKEN=$$NOTPROD_KUBE_TOKEN
       - export KUBE_SERVER=$$NOTPROD_KUBE_SERVER
-      - kd -f deployment.yml
+      - kd -f pvc.yml -f deployment.yml
     secrets:
       - NOTPROD_KUBE_TOKEN
       - NOTPROD_KUBE_SERVER
@@ -23,7 +23,7 @@ pipeline:
     commands:
       - export KUBE_TOKEN=$$PROD_KUBE_TOKEN
       - export KUBE_SERVER=$$PROD_KUBE_SERVER
-      - kd -f deployment.yml
+      - kd -f pvc.yml -f deployment.yml
     secrets:
       - PROD_KUBE_TOKEN
       - PROD_KUBE_SERVER

@@ -21,3 +21,8 @@ spec:
         volumeMounts:
           - mountPath: /backup
             name: backup
+
+      volumes:
+        - name: backup
+          persistentVolumeClaim:
+            claimName: backup

@@ -20,4 +20,4 @@ spec:
           runAsNonRoot: true
         volumeMounts:
           - mountPath: /backup
-            name: jira-backup
+            name: backup

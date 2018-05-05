@@ -18,11 +18,3 @@ spec:
         image: quay.io/ukhomeofficedigital/dq-postgres-docker
         securityContext:
           runAsNonRoot: true
-        volumeMounts:
-          - mountPath: /backup
-            name: backup
-
-      volumes:
-        - name: backup
-          persistentVolumeClaim:
-            claimName: backup
